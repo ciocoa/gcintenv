@@ -1,23 +1,16 @@
-#!/bin/sh -l
+#!/bin/sh
 
 time=$(date "+%Y-%m-%d %H:%M:%S")
-key="/root/keystore.p12"
-config="/root/config.json"
-accessAddress=${ACCESS_ADDRESS}
-language=${LANGUAGE}
-bindPort=${BIND_PORT}
-enableConsole=${ENABLE_CONSOLE}
-connectionUri=${MONGODB_URL}
 
 cd /root
 
-if [ ! -f "$key" ]; then
+if [ ! -f "/root/keystore.p12" ]; then
 
 echo "💠 [$time] 生成证书 💠"
 
 mkdir certs && cd certs
 
-openssl req -x509 -nodes -days 25202 -newkey rsa:2048 -subj "/C=GB/ST=Essex/L=London/O=Grasscutters/OU=Grasscutters/CN=$accessAddress" -keyout CAkey.key -out CAcert.crt
+openssl req -x509 -nodes -days 25202 -newkey rsa:2048 -subj "/C=GB/ST=Essex/L=London/O=Grasscutters/OU=Grasscutters/CN=${ACCESS_ADDRESS}" -keyout CAkey.key -out CAcert.crt
 
 openssl genpkey -out ssl.key -algorithm rsa
 
@@ -35,13 +28,13 @@ ST = Essex
 L = London
 O = Grasscutters
 OU = Grasscutters
-CN = $accessAddress
+CN = ${ACCESS_ADDRESS}
 
 [ req_ext ]
 subjectAltName = @alt_names
 
 [ alt_names ]
-IP.1 = $accessAddress
+IP.1 = ${ACCESS_ADDRESS}
 
 EOF
 
@@ -54,7 +47,7 @@ keyUsage = digitalSignature, nonRepudiation, keyEncipherment, keyAgreement, data
 subjectAltName = @alt_names
 
 [alt_names]
-IP.1 = $accessAddress
+IP.1 = ${ACCESS_ADDRESS}
 
 EOF
 
@@ -70,21 +63,21 @@ rm -rf certs
 
 fi
 
-if [ ! -f "$config" ]; then
+if [ ! -f "/root/config.json" ]; then
 
 echo "💠 [$time] 初始化配置 💠"
 
 java -jar grasscutter.jar
 
-sed -i 's#"language": "en_US"#"language": "$language"#g' config.json
+sed -i 's#"language": "en_US"#"language": "${LANGUAGE}"#g' config.json
 
-sed -i 's#"accessAddress": "127.0.0.1"#"accessAddress": "$accessAddress"#g' config.json
+sed -i 's#"accessAddress": "127.0.0.1"#"accessAddress": "${ACCESS_ADDRESS}"#g' config.json
 
-sed -i 's#"bindPort": 443#"bindPort": $bindPort#g' config.json
+sed -i 's#"bindPort": 443#"bindPort": ${BIND_PORT}#g' config.json
 
-sed -i 's#"enableConsole": true#"enableConsole": $enableConsole#g' config.json
+sed -i 's#"enableConsole": true#"enableConsole": ${ENABLE_CONSOLE}#g' config.json
 
-sed -i 's#"connectionUri": "mongodb://localhost:27017"#"connectionUri": "$connectionUri"#g' config.json
+sed -i 's#"connectionUri": "mongodb://localhost:27017"#"connectionUri": "${MONGODB_URL}"#g' config.json
 
 fi
 
