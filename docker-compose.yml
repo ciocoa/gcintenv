@@ -31,5 +31,8 @@ services:
     # volumes:
     #   - ./:/root
     environment:
+      LANGUAGE: zh-CN
+      ENABLE_CONSOLE: false
       ACCESS_ADDRESS: 127.0.0.1
+      BIND_PORT: 443
       MONGODB_URL: mongodb://root:123456@mongo:27017

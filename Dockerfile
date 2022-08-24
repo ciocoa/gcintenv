@@ -9,7 +9,7 @@ ENV TZ=Asia/Shanghai \
   BIND_PORT=443 \
   MONGODB_URL=localhost:27017 
 ADD . /app
-RUN cd /app && sh docker-setup.sh
+RUN sh /app/docker-setup.sh
+CMD sh /root/docker-entrypoint.sh
 EXPOSE 80 443 22102/udp
-VOLUME [ "/root" ]
-ENTRYPOINT [ "/root/docker-entrypoint.sh" ]
+VOLUME /root

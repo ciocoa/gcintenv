@@ -2,6 +2,8 @@
 
 time=$(date "+%Y-%m-%d %H:%M:%S")
 
+cd /app
+
 echo "💠 [$time] 初始化依赖 💠"
 
 apk add --no-cache openjdk17-jre openssl
@@ -39,5 +41,3 @@ cd /root
 rm -rf /app
 
 ls -la
-
-ls -la /
