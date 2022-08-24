@@ -30,6 +30,7 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
         with:
+          arguments: build
           build-root-directory: app
       - name: Upload artifact
         uses: actions/upload-artifact@v3
