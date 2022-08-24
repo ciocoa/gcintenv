@@ -12,7 +12,7 @@ wget https://nightly.link/Grasscutters/Grasscutter/workflows/build/${GIT_BRANCH}
 
 unzip -q Grasscutter.zip
 
-mv $(find -name "grasscutter*.jar" -type f) grasscutter.jar
+mv $(find -name "grasscutter*.jar" -type f) /root/grasscutter.jar
 
 echo "💠 [$time] 拉取资源 💠"
 
@@ -20,20 +20,24 @@ wget https://github.com/Koko-boya/Grasscutter_Resources/archive/refs/heads/${RES
 
 unzip -q resources.zip
 
-mv Grasscutter_Resources-${RESOURCE_VER}/Resources resources
+mv Grasscutter_Resources-${RESOURCE_VER}/Resources /root/resources
 
 echo "💠 [$time] 拉取插件 💠"
 
 wget https://github.com/liujiaqi7998/GrasscuttersWebDashboard/releases/download/V${WEBDASHBOARD_VER}/GrasscuttersWebDashboard-${WEBDASHBOARD_VER}.jar
 
-mkdir plugins
+mkdir /root/plugins
 
-mv $(find -name "GrasscuttersWebDashboard*.jar" -type f) plugins/webDashboard.jar
+mv $(find -name "GrasscuttersWebDashboard*.jar" -type f) /root/plugins/webDashboard.jar
 
 echo "💠 [$time] 清理文件 💠"
 
-rm -rf Grasscutter.zip resources.zip Grasscutter_Resources-${RESOURCE_VER}
+mv docker-entrypoint.sh /root
+
+cd /root
+
+rm -rf /app
 
 ls -la
 
-cat docker-entrypoint.sh
+ls -la /
