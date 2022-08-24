@@ -1,13 +1,13 @@
-name: Build CI
+name: Test CI
 
 on:
   push:
     branches:
       - 'main'
     paths:
-      - '**.py'
+      - '**.java'
   schedule:
-    - cron: '0 16 * * *'
+    - cron: '0 8 * * *'
   workflow_dispatch:
 
 jobs:
@@ -15,35 +15,24 @@ jobs:
     strategy:
       matrix:
         os: ['ubuntu-latest']
-        python-version: ['3.10']
+        java-version: ['18']
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - name: Setup Java
+        uses: actions/setup-java@v3
         with:
-          python-version: ${{ matrix.python-version }}
-      - name: Get AutoScripts
-        run: git clone https://github.com/Womsxd/AutoMihoyoBBS.git --depth=1
-      - name: Install dependencies
-        run: |
-          cd AutoMihoyoBBS
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Get Config
-        run: |
-          cd AutoMihoyoBBS/config
-          echo "${{ secrets.PUSH_INI }}" > push.ini
-          echo "${{ secrets.BOT_01 }}" > bot_1.yaml
-          echo "${{ secrets.BOT_02 }}" > bot_2.yaml
-          echo "${{ secrets.BOT_03 }}" > bot_3.yaml
-      - name: Auto Run
-        run: |
-          cd AutoMihoyoBBS
-          python main_multi.py autorun
+          java-version: ${{ matrix.java-version }}
+          distribution: 'temurin'
+      - name: Initialize project
+        run: git clone https://github.com/Grasscutters/Grasscutter.git app --depth=1
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          build-root-directory: app
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: config
-          path: AutoMihoyoBBS/config
+          name: Grasscutter
+          path: app/grasscutter*.jar
