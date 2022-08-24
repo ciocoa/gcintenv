@@ -7,7 +7,7 @@ on:
     paths:
       - '**.py'
   schedule:
-    - cron: '0 9 * * *'
+    - cron: '0 16 * * *'
   workflow_dispatch:
 
 jobs:
@@ -34,10 +34,10 @@ jobs:
       - name: Get Config
         run: |
           cd AutoMihoyoBBS/config
-          echo ${{ secrets.PUSH_INI }} > push.ini
-          echo ${{ secrets.BOT_01 }} > bot_1.yaml
-          echo ${{ secrets.BOT_02 }} > bot_2.yaml
-          echo ${{ secrets.BOT_03 }} > bot_3.yaml
+          echo "${{ secrets.PUSH_INI }}" > push.ini
+          echo "${{ secrets.BOT_01 }}" > bot_1.yaml
+          echo "${{ secrets.BOT_02 }}" > bot_2.yaml
+          echo "${{ secrets.BOT_03 }}" > bot_3.yaml
       - name: Auto Run
         run: |
           cd AutoMihoyoBBS
