@@ -1,6 +1,11 @@
-name: Docker CI
+name: Docker
 
 on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'docker*'
   release:
     types: ['published']
   workflow_dispatch:
