@@ -10,6 +10,7 @@ ENV TZ=Asia/Shanghai \
   MONGODB_URL=localhost:27017 
 ADD . /app
 RUN sh /app/docker-setup.sh
-CMD sh /root/docker-entrypoint.sh
 EXPOSE 80 443 22102/udp
 VOLUME /root
+WORKDIR /root
+CMD sh docker-entrypoint.sh

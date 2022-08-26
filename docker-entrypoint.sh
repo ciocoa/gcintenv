@@ -2,11 +2,9 @@
 
 time=$(date "+%Y-%m-%d %H:%M:%S")
 
-cd /root
-
 if [ ! -f "/root/keystore.p12" ]; then
 
-echo "💠 [$time] 生成证书 💠"
+echo "💠 [ $time ] 生成证书 💠"
 
 mkdir certs && cd certs
 
@@ -65,7 +63,7 @@ fi
 
 if [ ! -f "/root/config.json" ]; then
 
-echo "💠 [$time] 初始化配置 💠"
+echo "💠 [ $time ] 初始化配置 💠"
 
 java -jar grasscutter.jar
 
@@ -81,6 +79,6 @@ sed -i 's#"connectionUri": "mongodb://localhost:27017"#"connectionUri": "${MONGO
 
 fi
 
-echo "💠 [$time] 运行服务器 💠"
+echo "💠 [ $time ] 运行服务器 💠"
 
 java -jar grasscutter.jar
