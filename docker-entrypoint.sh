@@ -2,6 +2,8 @@
 
 time=$(date "+%Y-%m-%d %H:%M:%S")
 
+cd /root
+
 if [ ! -f "/root/keystore.p12" ]; then
 
 echo "💠 [ $time ] 生成证书 💠"
@@ -67,15 +69,15 @@ echo "💠 [ $time ] 初始化配置 💠"
 
 java -jar grasscutter.jar
 
-sed -i 's#"language": "en_US"#"language": "${LANGUAGE}"#g' config.json
+sed -i 's#\("language": "\).*#\1'"${LANGUAGE}"'",#g' config.json
 
-sed -i 's#"accessAddress": "127.0.0.1"#"accessAddress": "${ACCESS_ADDRESS}"#g' config.json
+sed -i 's#\("accessAddress": "\).*#\1'"${ACCESS_ADDRESS}"'",#g' config.json
 
-sed -i 's#"bindPort": 443#"bindPort": ${BIND_PORT}#g' config.json
+sed -i 's#\("bindPort": \).*#\1'${BIND_PORT}',#g' config.json
 
-sed -i 's#"enableConsole": true#"enableConsole": ${ENABLE_CONSOLE}#g' config.json
+sed -i 's#\("enableConsole": \).*#\1'${ENABLE_CONSOLE}',#g' config.json
 
-sed -i 's#"connectionUri": "mongodb://localhost:27017"#"connectionUri": "${MONGODB_URL}"#g' config.json
+sed -i 's#\("connectionUri": "\).*#\1'"${MONGODB_URL}"'",#g' config.json
 
 fi
 

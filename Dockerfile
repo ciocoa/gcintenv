@@ -12,5 +12,4 @@ ADD . /app
 RUN sh /app/docker-setup.sh
 EXPOSE 80 443 22102/udp
 VOLUME /root
-WORKDIR /root
-CMD sh docker-entrypoint.sh
+ENTRYPOINT [ "/root/docker-entrypoint.sh" ]
