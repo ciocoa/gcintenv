@@ -73,7 +73,7 @@ sed -i 's#\("language": "\).*#\1'"${LANGUAGE}"'",#g' config.json
 
 sed -i 's#\("accessAddress": "\).*#\1'"${ACCESS_ADDRESS}"'",#g' config.json
 
-sed -i 's#\("bindPort": \).*#\1'${BIND_PORT}',#g' config.json
+sed -i 's#\("bindPort": \)443#\1'${BIND_PORT}'#g' config.json
 
 sed -i 's#\("enableConsole": \).*#\1'${ENABLE_CONSOLE}',#g' config.json
 

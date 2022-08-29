@@ -29,10 +29,8 @@ services:
       - 443:443
       - 22102:22102/udp
     # volumes:
-    #   - ./:/root
+    #   - ./plugins:/root/plugins
+    #   - ./config.json:/root/config.json
     environment:
-      LANGUAGE: zh-CN
-      ENABLE_CONSOLE: "false"
       ACCESS_ADDRESS: 127.0.0.1
-      BIND_PORT: 443
       MONGODB_URL: mongodb://root:123456@mongo:27017
