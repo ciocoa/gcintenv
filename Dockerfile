@@ -1,8 +1,7 @@
 FROM alpine:latest
 ENV TZ=Asia/Shanghai \
-  GIT_BRANCH=development \
-  RESOURCE_VER=3.0 \
-  ADD_WEB_PLUGIN=false \
+  BRANCH=development \
+  RESOURCE=3.0 \
   LANGUAGE=en_US \
   ENABLE_CONSOLE=true \
   ACCESS_ADDRESS=127.0.0.1 \

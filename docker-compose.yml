@@ -31,8 +31,8 @@ services:
     # volumes:
     #   - ./plugins:/root/plugins
     environment:
-      ADD_WEB_PLUGIN: true
       LANGUAGE: zh_CN
       ACCESS_ADDRESS: 127.0.0.1
-      ENABLE_CONSOLE: false
+      BIND_PORT: 443
+      ENABLE_CONSOLE: "false"
       MONGODB_URL: mongodb://root:123456@mongo:27017

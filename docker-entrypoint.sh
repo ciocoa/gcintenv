@@ -65,23 +65,7 @@ rm -rf certs
 
 ls -la
 
-echo "💠 [ $time ] Done. 💠"
-
-fi
-
-if [ ${ADD_WEB_PLUGIN} ]; then
-
-echo "💠 [ $time ] 添加插件... 💠"
-
-wget -q $(wget -qO- -t1 -T2 "https://api.github.com/repos/liujiaqi7998/GrasscuttersWebDashboard/releases/latest" | grep "browser_download_url" | head -n 1 | awk -F ": " '{print $2}' | sed 's/\"//g;s/,//g;s/ //g')
-
-mkdir plugins
-
-mv $(find -name "GrasscuttersWebDashboard*.jar" -type f) plugins/webDashboard.jar
-
-ls -la plugins
-
-echo "💠 [ $time ] Done. 💠"
+echo "💠 [ $time ] 生成证书...Done. 💠"
 
 fi
 
@@ -101,9 +85,7 @@ sed -i 's#\("enableConsole": \).*#\1'${ENABLE_CONSOLE}',#g' config.json
 
 sed -i 's#\("connectionUri": "\).*#\1'"${MONGODB_URL}"'",#g' config.json
 
-cat config.json
-
-echo "💠 [ $time ] Done. 💠"
+echo "💠 [ $time ] 初始化配置...Done. 💠"
 
 fi
 
