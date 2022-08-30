@@ -30,7 +30,9 @@ services:
       - 22102:22102/udp
     # volumes:
     #   - ./plugins:/root/plugins
-    #   - ./config.json:/root/config.json
     environment:
+      ADD_WEB_PLUGIN: true
+      LANGUAGE: zh_CN
       ACCESS_ADDRESS: 127.0.0.1
+      ENABLE_CONSOLE: false
       MONGODB_URL: mongodb://root:123456@mongo:27017
