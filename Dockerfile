@@ -2,6 +2,7 @@ FROM alpine:latest
 ENV TZ=Asia/Shanghai \
   BRANCH=development \
   RESOURCE=3.0 \
+  WEB_PLUGIN=false \
   LANGUAGE=en_US \
   ENABLE_CONSOLE=true \
   ACCESS_ADDRESS=127.0.0.1 \

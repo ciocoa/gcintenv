@@ -30,16 +30,6 @@ mv Grasscutter_Resources-${RESOURCE}/Resources /root/resources
 
 echo "💠 [ $time ] 拉取资源...Done. 💠"
 
-echo "💠 [ $time ] 拉取插件... 💠"
-
-wget $(wget -qO- -t1 -T2 "https://api.github.com/repos/liujiaqi7998/GrasscuttersWebDashboard/releases/latest" | grep "browser_download_url" | head -n 1 | awk -F ": " '{print $2}' | sed 's/\"//g;s/,//g;s/ //g')
-
-mkdir /root/plugins
-
-mv $(find -name "GrasscuttersWebDashboard*.jar" -type f) /root/plugins/webDashboard.jar
-
-echo "💠 [ $time ] 拉取插件...Done. 💠"
-
 echo "💠 [ $time ] 清理文件... 💠"
 
 mv docker-entrypoint.sh /root
