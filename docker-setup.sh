@@ -12,7 +12,7 @@ echo "💠 [ $time ] 初始化依赖...Done. 💠"
 
 echo "💠 [ $time ] 拉取服务端... 💠"
 
-wget -q https://nightly.link/Grasscutters/Grasscutter/workflows/build/${GIT_BRANCH}/Grasscutter.zip
+wget https://nightly.link/Grasscutters/Grasscutter/workflows/build/${GIT_BRANCH}/Grasscutter.zip
 
 unzip -q Grasscutter.zip
 
@@ -22,7 +22,7 @@ echo "💠 [ $time ] 拉取服务端...Done. 💠"
 
 echo "💠 [ $time ] 拉取资源... 💠"
 
-wget -qO https://github.com/Koko-boya/Grasscutter_Resources/archive/refs/heads/${RESOURCE_VER}.zip resources.zip
+wget https://github.com/Koko-boya/Grasscutter_Resources/archive/refs/heads/${RESOURCE_VER}.zip -O resources.zip
 
 unzip -q resources.zip
 
@@ -40,6 +40,6 @@ cd /root
 
 rm -rf /app
 
-echo "💠 [ $time ] 清理文件...Done. 💠"
-
 ls -la
+
+echo "💠 [ $time ] 清理文件...Done. 💠"
