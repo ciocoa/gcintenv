@@ -10,9 +10,7 @@ echo "💠 [ $time ] 拉取插件... 💠"
 
 wget $(wget -qO- -t1 -T2 "https://api.github.com/repos/liujiaqi7998/GrasscuttersWebDashboard/releases/latest" | grep "browser_download_url" | head -n 1 | awk -F ": " '{print $2}' | sed 's/\"//g;s/,//g;s/ //g')
 
-mkdir plugins
-
-mv $(find -name "GrasscuttersWebDashboard*.jar" -type f) plugins/webDashboard.jar
+mv $(find -name "GrasscuttersWebDashboard*.jar" -type f) plugins
 
 echo "💠 [ $time ] 拉取插件...Done. 💠"
 
