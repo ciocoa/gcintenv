@@ -12,7 +12,7 @@ echo "💠 [ $time ] 初始化依赖...Done. 💠"
 
 echo "💠 [ $time ] 拉取服务端... 💠"
 
-wget https://nightly.link/Grasscutters/Grasscutter/workflows/build/${GIT_BRANCH}/Grasscutter.zip
+wget https://nightly.link/Grasscutters/Grasscutter/workflows/build/${BRANCH}/Grasscutter.zip
 
 unzip -q Grasscutter.zip
 
@@ -22,11 +22,11 @@ echo "💠 [ $time ] 拉取服务端...Done. 💠"
 
 echo "💠 [ $time ] 拉取资源... 💠"
 
-wget https://github.com/Koko-boya/Grasscutter_Resources/archive/refs/heads/${RESOURCE_VER}.zip -O resources.zip
+wget https://github.com/Koko-boya/Grasscutter_Resources/archive/refs/heads/${RESOURCE}.zip -O resources.zip
 
 unzip -q resources.zip
 
-mv Grasscutter_Resources-${RESOURCE_VER}/Resources /root/resources
+mv Grasscutter_Resources-${RESOURCE}/Resources /root/resources
 
 echo "💠 [ $time ] 拉取资源...Done. 💠"
 
