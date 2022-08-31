@@ -8,7 +8,7 @@ ENV TZ=Asia/Shanghai \
   GC_ACCESS_ADDRESS=127.0.0.1 \
   GC_BIND_PORT=443 \
   GC_MONGODB_URL=localhost:27017 
-COPY *.sh /app
+COPY *.sh /app/
 RUN sh /app/docker-setup.sh
 EXPOSE 80 443 22102/udp
 VOLUME [ "/root/plugins" ]
