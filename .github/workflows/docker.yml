@@ -12,7 +12,7 @@ env:
   REGISTRY: docker.io
   # github.repository as <account>/<repo>
   # IMAGE_NAME: ${{ github.repository }}
-  IMAGE_NAME: nekohashizuku/grasscutter
+  IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/grasscutter
 
 permissions:
   contents: read

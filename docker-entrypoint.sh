@@ -4,7 +4,7 @@ time=$(date "+%Y-%m-%d %H:%M:%S")
 
 cd /root
 
-if [ ${WEB_PLUGIN} ] && [ ! -f "/root/plugins/*.jar" ]; then
+if [ ${GC_WEB_PLUGIN} ] && [ ! -f "/root/plugins/*.jar" ]; then
 
 echo "💠 [ $time ] 拉取插件... 💠"
 
@@ -24,7 +24,7 @@ mkdir certs
 
 cd certs
 
-openssl req -x509 -nodes -days 25202 -newkey rsa:2048 -subj "/C=GB/ST=Essex/L=London/O=Grasscutters/OU=Grasscutters/CN=${ACCESS_ADDRESS}" -keyout CAkey.key -out CAcert.crt
+openssl req -x509 -nodes -days 25202 -newkey rsa:2048 -subj "/C=GB/ST=Essex/L=London/O=Grasscutters/OU=Grasscutters/CN=${GC_ACCESS_ADDRESS}" -keyout CAkey.key -out CAcert.crt
 
 openssl genpkey -out ssl.key -algorithm rsa
 
@@ -42,13 +42,13 @@ ST = Essex
 L = London
 O = Grasscutters
 OU = Grasscutters
-CN = ${ACCESS_ADDRESS}
+CN = ${GC_ACCESS_ADDRESS}
 
 [ req_ext ]
 subjectAltName = @alt_names
 
 [ alt_names ]
-IP.1 = ${ACCESS_ADDRESS}
+IP.1 = ${GC_ACCESS_ADDRESS}
 
 EOF
 
@@ -61,7 +61,7 @@ keyUsage = digitalSignature, nonRepudiation, keyEncipherment, keyAgreement, data
 subjectAltName = @alt_names
 
 [alt_names]
-IP.1 = ${ACCESS_ADDRESS}
+IP.1 = ${GC_ACCESS_ADDRESS}
 
 EOF
 
@@ -75,8 +75,6 @@ mv certs/keystore.p12 .
 
 rm -rf certs
 
-ls -la
-
 echo "💠 [ $time ] 生成证书...Done. 💠"
 
 fi
@@ -87,15 +85,15 @@ echo "💠 [ $time ] 初始化配置... 💠"
 
 java -jar grasscutter.jar
 
-sed -i 's#\("language": "\).*#\1'"${LANGUAGE}"'",#g' config.json
+sed -i 's#\("language": "\).*#\1'"${GC_LANGUAGE}"'",#g' config.json
 
-sed -i 's#\("accessAddress": "\).*#\1'"${ACCESS_ADDRESS}"'",#g' config.json
+sed -i 's#\("accessAddress": "\).*#\1'"${GC_ACCESS_ADDRESS}"'",#g' config.json
 
-sed -i 's#\("bindPort": \)443#\1'${BIND_PORT}'#g' config.json
+sed -i 's#\("bindPort": \)443#\1'${GC_BIND_PORT}'#g' config.json
 
-sed -i 's#\("enableConsole": \).*#\1'${ENABLE_CONSOLE}',#g' config.json
+sed -i 's#\("enableConsole": \).*#\1'${GC_ENABLE_CONSOLE}',#g' config.json
 
-sed -i 's#\("connectionUri": "\).*#\1'"${MONGODB_URL}"'",#g' config.json
+sed -i 's#\("connectionUri": "\).*#\1'"${GC_MONGODB_URL}"'",#g' config.json
 
 echo "💠 [ $time ] 初始化配置...Done. 💠"
 
