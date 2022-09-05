@@ -33,7 +33,7 @@ services:
     volumes:
       - ./plugins:/root/plugins
     environment:
-      GC_WEB_PLUGIN: "true"
+      GC_PLUGIN: "true"
       GC_LANGUAGE: zh_CN
       GC_ACCESS_ADDRESS: 127.0.0.1
       GC_BIND_PORT: 443

@@ -2,17 +2,19 @@
 
 time=$(date "+%Y-%m-%d %H:%M:%S")
 
-cd /app
+cd /tmp
 
 echo "💠 [ $time ] 初始化依赖... 💠"
 
-apk add --no-cache openjdk17-jre openssl
+apk add --no-cache openjdk18-jre openssl tzdata
+
+cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 echo "💠 [ $time ] 初始化依赖...Done. 💠"
 
 echo "💠 [ $time ] 拉取服务端... 💠"
 
-wget https://nightly.link/Grasscutters/Grasscutter/workflows/build/${GC_BRANCH}/Grasscutter.zip
+wget https://nightly.link/Grasscutters/Grasscutter/workflows/build/development/Grasscutter.zip
 
 unzip -q Grasscutter.zip
 
@@ -22,11 +24,11 @@ echo "💠 [ $time ] 拉取服务端...Done. 💠"
 
 echo "💠 [ $time ] 拉取资源... 💠"
 
-wget https://github.com/Koko-boya/Grasscutter_Resources/archive/refs/heads/${GC_RESOURCE}.zip -O resources.zip
+wget https://github.com/Koko-boya/Grasscutter_Resources/archive/refs/heads/3.0.zip -O resources.zip
 
 unzip -q resources.zip
 
-mv Grasscutter_Resources-${GC_RESOURCE}/Resources /root/resources
+mv Grasscutter_Resources-3.0/Resources /root/resources
 
 echo "💠 [ $time ] 拉取资源...Done. 💠"
 
@@ -36,8 +38,8 @@ mv docker-entrypoint.sh /root
 
 cd /root
 
-rm -rf /app
+rm -rf /tmp/*
 
-ls -la
+apk del tzdata
 
 echo "💠 [ $time ] 清理文件...Done. 💠"

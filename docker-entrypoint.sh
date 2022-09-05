@@ -4,13 +4,13 @@ time=$(date "+%Y-%m-%d %H:%M:%S")
 
 cd /root
 
-if [ ${GC_WEB_PLUGIN} ] && [ ! -f "/root/plugins/*.jar" ]; then
+if [ ${GC_PLUGIN} ] && [ ! -f "/root/plugins/opencommand.jar" ]; then
 
 echo "💠 [ $time ] 拉取插件... 💠"
 
-wget $(wget -qO- -t1 -T2 "https://api.github.com/repos/liujiaqi7998/GrasscuttersWebDashboard/releases/latest" | grep "browser_download_url" | head -n 1 | awk -F ": " '{print $2}' | sed 's/\"//g;s/,//g;s/ //g')
+wget https://github.com/jie65535/gc-opencommand-plugin/releases/download/v1.4.0/opencommand-dev-1.4.0.jar
 
-mv $(find -name "GrasscuttersWebDashboard*.jar" -type f) plugins
+mv $(find -name "opencommand*.jar" -type f) plugins/opencommand.jar
 
 echo "💠 [ $time ] 拉取插件...Done. 💠"
 
