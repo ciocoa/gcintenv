@@ -6,7 +6,7 @@ cd /tmp
 
 echo "💠 [ $time ] 初始化依赖... 💠"
 
-apk add --no-cache openjdk18-jre openssl tzdata
+apk add --no-cache openjdk17-jre openssl tzdata
 
 cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
