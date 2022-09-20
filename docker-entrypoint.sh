@@ -8,7 +8,7 @@ if [ ${GC_PLUGIN} ] && [ ! -f "/root/plugins/opencommand.jar" ]; then
 
 echo "💠 [ $time ] 拉取插件... 💠"
 
-wget https://github.com/jie65535/gc-opencommand-plugin/releases/download/v1.4.0/opencommand-dev-1.4.0.jar
+wget https://github.com/jie65535/gc-opencommand-plugin/releases/latest/download/opencommand-dev-1.4.0.jar
 
 mv $(find -name "opencommand*.jar" -type f) plugins/opencommand.jar
 
