@@ -21,10 +21,10 @@ jobs:
       - name: Initialize project
         run: |
           git clone https://github.com/Womsxd/AutoMihoyoBBS.git app --depth=1
-          echo "${{ secrets.BOT_01 }}" > app/config/bot_1.yaml
-          echo "${{ secrets.BOT_02 }}" > app/config/bot_2.yaml
-          echo "${{ secrets.BOT_03 }}" > app/config/bot_3.yaml
-          echo "${{ secrets.PUSH_INI }}" > app/config/push.ini
+          wget ${{ secrets.BOT_01 }} -O app/config/bot_01.yaml
+          wget ${{ secrets.BOT_02 }} -O app/config/bot_02.yaml
+          wget ${{ secrets.BOT_03 }} -O app/config/bot_03.yaml
+          wget ${{ secrets.PUSH_0 }} -O app/config/push.ini
       - name: Install dependencies
         run: pip install -r app/requirements.txt
       - name: Build and Run
