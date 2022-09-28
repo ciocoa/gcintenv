@@ -24,11 +24,11 @@ echo "💠 [ $time ] 拉取服务端...Done. 💠"
 
 echo "💠 [ $time ] 拉取资源... 💠"
 
-wget https://github.com/Koko-boya/Grasscutter_Resources/archive/refs/heads/3.0.zip -O resources.zip
+wget https://github.com/tamilpp25/Grasscutter_Resources/archive/refs/heads/3.1.zip -O resources.zip
 
 unzip -q resources.zip
 
-mv Grasscutter_Resources-3.0/Resources /root/resources
+mv Grasscutter_Resources-3.1/Resources /root/resources
 
 echo "💠 [ $time ] 拉取资源...Done. 💠"
 
