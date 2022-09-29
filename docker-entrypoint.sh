@@ -4,21 +4,21 @@ time=$(date "+%Y-%m-%d %H:%M:%S")
 
 cd /root
 
-if [ ${GC_PLUGIN} ] && [ ! -f "/root/plugins/opencommand.jar" ]; then
+if [ ${GC_PLUGIN} ] && [ ! -f "plugins/opencommand.jar" ]; then
 
-echo "💠 [ $time ] 拉取插件... 💠"
+echo "[$time] 拉取插件..."
 
 wget https://github.com/jie65535/gc-opencommand-plugin/releases/latest/download/opencommand-dev-1.4.0.jar
 
 mv $(find -name "opencommand*.jar" -type f) plugins/opencommand.jar
 
-echo "💠 [ $time ] 拉取插件...Done. 💠"
+echo "[$time] 拉取插件...Done."
 
 fi
 
-if [ ! -f "/root/keystore.p12" ]; then
+if [ ! -f "keystore.p12" ]; then
 
-echo "💠 [ $time ] 生成证书... 💠"
+echo "[$time] 生成证书..."
 
 mkdir certs 
 
@@ -75,15 +75,15 @@ mv certs/keystore.p12 .
 
 rm -rf certs
 
-echo "💠 [ $time ] 生成证书...Done. 💠"
+echo "[$time] 生成证书...Done."
 
 fi
 
-if [ ! -f "/root/config.json" ]; then
+if [ ! -f "config.json" ]; then
 
-echo "💠 [ $time ] 初始化配置... 💠"
+echo "[$time] 初始化配置..."
 
-java -jar grasscutter.jar
+java -jar -Duser.timezone=${GC_TZ} grasscutter.jar
 
 sed -i 's#\("language": "\).*#\1'"${GC_LANGUAGE}"'",#g' config.json
 
@@ -95,10 +95,10 @@ sed -i 's#\("enableConsole": \).*#\1'${GC_ENABLE_CONSOLE}',#g' config.json
 
 sed -i 's#\("connectionUri": "\).*#\1'"${GC_MONGODB_URL}"'",#g' config.json
 
-echo "💠 [ $time ] 初始化配置...Done. 💠"
+echo "[$time] 初始化配置...Done."
 
 fi
 
-echo "💠 [ $time ] 运行服务器... 💠"
+echo "[$time] 运行服务器..."
 
-java -jar grasscutter.jar
+java -jar -Duser.timezone=${GC_TZ} grasscutter.jar

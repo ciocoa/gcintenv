@@ -17,7 +17,7 @@ jobs:
       - name: Initialize project
         run: git clone https://github.com/tamilpp25/Grasscutter_Resources.git app --depth=1
       - name: Build with Zip
-        run: zip -r resources.zip app/Resources/*
+        run: zip -q -r resources.zip app/Resources
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:

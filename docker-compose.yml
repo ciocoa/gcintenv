@@ -21,10 +21,10 @@ services:
       ME_CONFIG_BASICAUTH_USERNAME: admin
       ME_CONFIG_BASICAUTH_PASSWORD: 123456
       ME_CONFIG_MONGODB_URL: mongodb://root:123456@mongo:27017
-  grasscutter:
+  gcintenv:
     depends_on:
-      - mongo-express
-    image: nekohashizuku/grasscutter
+      - mongo
+    image: ghcr.io/ciocoa/gcintenv
     restart: always
     ports:
       - 80:80
@@ -33,6 +33,7 @@ services:
     volumes:
       - ./plugins:/root/plugins
     environment:
+      GC_TZ: Asia/Shanghai
       GC_PLUGIN: "true"
       GC_LANGUAGE: zh_CN
       GC_ACCESS_ADDRESS: 127.0.0.1

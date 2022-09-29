@@ -4,8 +4,9 @@ on:
   schedule:
     - cron: "30 20 * * *"
   push:
-    branches: ["main"]
     tags: ["v*.*.*"]
+  release:
+    types: ["published"]
   pull_request:
     branches: ["main"]
 
