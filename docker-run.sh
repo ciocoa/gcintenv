@@ -36,4 +36,6 @@ mv docker-entrypoint.sh /root
 
 rm -rf *
 
+ls -la /root
+
 echo "[$time] 清理文件...Done."

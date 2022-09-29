@@ -83,7 +83,7 @@ if [ ! -f "config.json" ]; then
 
 echo "[$time] 初始化配置..."
 
-java -jar -Duser.timezone=${GC_TZ} grasscutter.jar
+java -jar grasscutter.jar
 
 sed -i 's#\("language": "\).*#\1'"${GC_LANGUAGE}"'",#g' config.json
 
@@ -101,4 +101,4 @@ fi
 
 echo "[$time] 运行服务器..."
 
-java -jar -Duser.timezone=${GC_TZ} grasscutter.jar
+java -jar grasscutter.jar
