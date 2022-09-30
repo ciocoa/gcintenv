@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: app
-          path: app/grasscutter*.jar
+          path: app/*.jar
 
   upload:
     runs-on: ubuntu-latest
@@ -43,11 +43,11 @@ jobs:
       - name: Initialize project
         run: git clone https://github.com/tamilpp25/Grasscutter_Resources.git app --depth=1
       - name: Build with Zip
-        run: cd app/Resources && zip -dg -r resources.zip *
+        run: cd app/Resources && zip -rq resources.zip * && mv *.zip ../..
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: app
           path: |
-            grasscutter*.jar
-            app/Resources/resources.zip
+            *.jar
+            *.zip
