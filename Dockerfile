@@ -1,7 +1,6 @@
 FROM alpine:latest
 ENV \
   GC_TZ=Asia/Shanghai \
-  GC_PLUGIN=false \
   GC_LANGUAGE=en_US \
   GC_ENABLE_CONSOLE=true \
   GC_ACCESS_ADDRESS=127.0.0.1 \

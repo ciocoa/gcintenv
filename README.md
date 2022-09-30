@@ -51,7 +51,6 @@ services:
       - ./plugins:/root/plugins
     environment:
       GC_TZ: Asia/Shanghai # set server timezone, do not change if 'false'
-      GC_PLUGIN: "true" # use opencommand plugin, 'true' or 'false'
       GC_LANGUAGE: en_US # server language
       GC_ACCESS_ADDRESS: 127.0.0.1 # server access address
       GC_BIND_PORT: 443 # server port

@@ -2,39 +2,35 @@
 
 time=$(date "+%Y-%m-%d %H:%M:%S")
 
-cd /root
+cd /root/
 
 if [ $GC_TZ ] && [ $GC_TZ != "false" ] && [ ! -f "/etc/timezone" ]; then
 
-echo "[$time] Set timezone..."
-
-apk -U --no-cache add tzdata
+echo "$time >> Set timezone..."
 
 cp /usr/share/zoneinfo/$GC_TZ /etc/localtime
 
 echo $GC_TZ > /etc/timezone
 
-apk del tzdata
+fi
+
+if [ ! -f "./plugins/opencommand.jar" ]; then
+
+echo "$time >> Set the opencommand plugin..."
+
+mkdir plugins
+
+mv opencommand.jar ./plugins/
+
+echo "$time >> Set the opencommand plugin...Done."
 
 fi
 
-if [ $GC_PLUGIN ] && [ $GC_PLUGIN != "false" ] && [ ! -f "plugins/opencommand.jar" ]; then
+if [ ! -f "./keystore.p12" ]; then
 
-echo "[$time] Get the opencommand plugin..."
+echo "$time >> Generating CA key and certificate pair..."
 
-wget https://github.com/jie65535/gc-opencommand-plugin/releases/latest/download/opencommand-dev-1.4.0.jar
-
-mv $(find -name "opencommand*.jar" -type f) plugins/opencommand.jar
-
-echo "[$time] Get the opencommand plugin...Done."
-
-fi
-
-if [ ! -f "keystore.p12" ]; then
-
-echo "[$time] Generating CA key and certificate pair..."
-
-mkdir certs 
+mkdir certs
 
 cd certs
 
@@ -89,13 +85,19 @@ mv certs/keystore.p12 .
 
 rm -rf certs
 
-echo "[$time] Generating CA key and certificate pair...Done."
+echo "$time >> Generating CA key and certificate pair...Done."
 
 fi
 
-if [ ! -f "config.json" ]; then
+echo "$time >> Clean up redundant files..."
 
-echo "[$time] Initial configuration..."
+apk del openssl tzdata
+
+echo "$time >> Clean up redundant files...Done."
+
+if [ ! -f "./config.json" ]; then
+
+echo "$time >> Initial configuration..."
 
 java -jar grasscutter.jar
 
@@ -109,10 +111,10 @@ sed -i 's#\("enableConsole": \).*#\1'$GC_ENABLE_CONSOLE',#g' config.json
 
 sed -i 's#\("connectionUri": "\).*#\1'"$GC_MONGODB_URL"'",#g' config.json
 
-echo "[$time] Initial configuration...Done."
+echo "$time >> Initial configuration...Done."
 
 fi
 
-echo "[$time] Running server..."
+echo "$time >> Running server..."
 
 java -jar grasscutter.jar

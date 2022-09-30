@@ -2,40 +2,34 @@
 
 time=$(date "+%Y-%m-%d %H:%M:%S")
 
-echo "[$time] Initialize dependencies..."
+echo "$time >> Initialize dependencies..."
 
-cd /tmp
+cd /tmp/
 
-apk -U --no-cache add openjdk17-jre openssl
+apk -U --no-cache add openjdk17-jre openssl tzdata
 
-echo "[$time] Initialize dependencies...Done."
+echo "$time >> Initialize dependencies...Done."
 
-echo "[$time] Pull the Grasscutter server..."
+echo "$time >> Pull the Grasscutter server and resources..."
 
-wget https://nightly.link/Grasscutters/Grasscutter/workflows/build/development/Grasscutter.zip
+wget https://nightly.link/ciocoa/gcintenv/workflows/gradle/main/app.zip
 
-unzip -q Grasscutter.zip
+unzip -q app.zip
 
-mv $(find -name "grasscutter*.jar" -type f) /root/grasscutter.jar
+mv *.jar /root/
 
-echo "[$time] Pull the Grasscutter server...Done."
+unzip -q resources.zip -d /root/resources/
 
-echo "[$time] Pull the Grasscutter resources..."
+ls -la /root/resources/
 
-wget https://github.com/tamilpp25/Grasscutter_Resources/archive/refs/heads/3.1.zip -O resources.zip
+echo "$time >> Pull the Grasscutter server and resources...Done."
 
-unzip -q resources.zip
+echo "$time >> Clean up redundant files..."
 
-mv Grasscutter_Resources-3.1/Resources /root/resources
-
-echo "[$time] Pull the Grasscutter resources...Done."
-
-echo "[$time] Clean up redundant files..."
-
-mv docker-entrypoint.sh /root
+mv docker-entrypoint.sh /root/
 
 rm -rf *
 
-ls -la /root
+ls -la /root/
 
-echo "[$time] Clean up redundant files...Done."
+echo "$time >> Clean up redundant files...Done."
