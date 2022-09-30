@@ -7,7 +7,6 @@ services:
       - 27017:27017
     volumes:
       - ./db:/data/db
-      - /etc/localtime:/etc/localtime
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: 123456
@@ -33,8 +32,8 @@ services:
       - 22102:22102/udp
     volumes:
       - ./plugins:/root/plugins
-      - /etc/localtime:/etc/localtime
     environment:
+      GC_TZ: Asia/Shanghai
       GC_PLUGIN: "true"
       GC_LANGUAGE: zh_CN
       GC_ACCESS_ADDRESS: 127.0.0.1

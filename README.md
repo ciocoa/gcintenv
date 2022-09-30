@@ -23,11 +23,10 @@ services:
       - 27017:27017
     volumes:
       - ./db:/data/db
-      - /etc/localtime:/etc/localtime
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: 123456
-  # Uncomment if use mongo-express
+  # uncomment if use mongo-express
   # mongo-express:
   #   depends_on:
   #     - mongo
@@ -50,12 +49,12 @@ services:
       - 22102:22102/udp
     volumes:
       - ./plugins:/root/plugins
-      - /etc/localtime:/etc/localtime
     environment:
-      GC_PLUGIN: "true" # use opencommand plugin
+      GC_TZ: Asia/Shanghai # set server timezone, do not change if 'false'
+      GC_PLUGIN: "true" # use opencommand plugin, 'true' or 'false'
       GC_LANGUAGE: en_US # server language
       GC_ACCESS_ADDRESS: 127.0.0.1 # server access address
       GC_BIND_PORT: 443 # server port
-      GC_ENABLE_CONSOLE: "false" # Turn off EOF detected warning
+      GC_ENABLE_CONSOLE: "false" # turn off 'EOF detected' warning
       GC_MONGODB_URL: mongodb://root:123456@mongo:27017 # mongodb URL
 ```
