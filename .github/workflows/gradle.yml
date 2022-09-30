@@ -9,11 +9,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  job_1:
+    name: build server
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -29,17 +28,49 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: app
+          name: grasscutter
           path: app/*.jar
 
-  upload:
+  job_2:
+    name: build plugin
+    needs: job_1
     runs-on: ubuntu-latest
-    needs: build
+    steps:
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: "18"
+          distribution: "temurin"
+      - name: Initialize project
+        run: git clone https://github.com/jie65535/gc-opencommand-plugin.git app --depth=1
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: grasscutter
+      - name: Set lib
+        run: cd app && mkdir lib && mv ../*.jar ./lib
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: jar
+          build-root-directory: app
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: opencommand
+          path: app/*.jar
+
+  job_3:
+    name: upload resource
+    needs: job_2
+    runs-on: ubuntu-latest
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: app
+          name: |
+            grasscutter
+            opencommand
       - name: Initialize project
         run: git clone https://github.com/tamilpp25/Grasscutter_Resources.git app --depth=1
       - name: Build with Zip
