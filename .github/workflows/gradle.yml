@@ -67,10 +67,6 @@ jobs:
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v3
-        with:
-          name: |
-            grasscutter
-            opencommand
       - name: Initialize project
         run: git clone https://github.com/tamilpp25/Grasscutter_Resources.git app --depth=1
       - name: Build with Zip
