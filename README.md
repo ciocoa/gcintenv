@@ -49,6 +49,8 @@ services:
       - 22102:22102/udp
     volumes:
       - ./plugins:/root/plugins
+      # - ./config.json:/root/config.json # uncomment if use your exactly config
+      # - ./keystore.p12:/root/keystore.p12 # uncomment if use your ssl key
     environment:
       GC_TZ: Asia/Shanghai # set server timezone, do not change if 'false'
       GC_LANGUAGE: en_US # server language
