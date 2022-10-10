@@ -89,11 +89,15 @@ echo "$time >> Generating CA key and certificate pair...Done."
 
 fi
 
+if  [ -d "/usr/share/zoneinfo/" ]; then
+
 echo "$time >> Clean up redundant files..."
 
 apk del openssl tzdata
 
 echo "$time >> Clean up redundant files...Done."
+
+fi
 
 if [ ! -f "./config.json" ]; then
 
