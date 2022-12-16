@@ -68,7 +68,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
       - name: Initialize project
-        run: git clone https://github.com/tamilpp25/Grasscutter_Resources.git app --depth=1
+        run: git clone https://git.crepe.moe/grasscutters/Grasscutter_Resources.git app --depth=1
       - name: Build with Zip
         run: |
           mv grasscutter/*.jar ./grasscutter.jar
